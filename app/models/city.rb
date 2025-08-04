@@ -1,4 +1,6 @@
 class City < ApplicationRecord
+  has_many :cinemas
+
   before_validation :upcase_state
 
   validates :name, presence: true

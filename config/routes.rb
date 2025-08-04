@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get "cinemas/index"
+  get "cinemas/show"
+  get "cinemas/create"
+  get "cinemas/update"
+  get "cinemas/destroy"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -11,4 +16,13 @@ Rails.application.routes.draw do
 
   # City
   resources :cities, except: [ :new, :edit ]
+
+  # Cinema
+  resources :cinemas, except: [ :new, :edit ]
+
+  # Hall
+  resources :halls, except: [ :new, :edit ]
+
+  # Seat
+  resources :seats, except: [ :new, :edit ]
 end

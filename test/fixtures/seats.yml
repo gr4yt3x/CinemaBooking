@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hall: one
+  seat_number: MyString
+  row: MyString
+  column: MyString
+  seat_type: MyString
+  status: MyString
+
+two:
+  hall: two
+  seat_number: MyString
+  row: MyString
+  column: MyString
+  seat_type: MyString
+  status: MyString
