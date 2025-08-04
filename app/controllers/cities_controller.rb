@@ -1,6 +1,6 @@
 class CitiesController < ApplicationController
   before_action :set_city, only: %i[show update destroy]
-  
+
   def index
     cities = City.all
     render json: cities

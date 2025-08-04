@@ -33,11 +33,11 @@ class HallsController < ApplicationController
     @hall.destroy!
   end
 
-  private 
+  private
     def set_hall
       @hall = Hall.find(params.expect(:id))
     end
-    
+
     def hall_params
       params.expect(hall: [ :cinema_id, :name, :total_seats ])
     end

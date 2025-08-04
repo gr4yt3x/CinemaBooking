@@ -1,6 +1,6 @@
 class CinemasController < ApplicationController
   before_action :set_cinema, only: %i[show update destroy]
-  
+
   def index
     cinemas = Cinema.all
     render json: cinemas
@@ -35,7 +35,7 @@ class CinemasController < ApplicationController
   def set_cinema
     @cinema = Cinema.find(params[:id])
   end
-  
+
   def cinema_params
     params.expect(cinema: [ :name, :address, :cnpj, :email, :city_id, :description, :phone, :logo ])
   end
