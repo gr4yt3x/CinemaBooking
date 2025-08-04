@@ -19,4 +19,7 @@ Rails.application.routes.draw do
 
   # Cinema
   resources :cinemas, except: [ :new, :edit ]
+
+  # Hall
+  resources :halls, except: [ :new, :edit ]
 end
