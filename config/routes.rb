@@ -22,4 +22,7 @@ Rails.application.routes.draw do
 
   # Hall
   resources :halls, except: [ :new, :edit ]
+
+  # Seat
+  resources :seats, except: [ :new, :edit ]
 end

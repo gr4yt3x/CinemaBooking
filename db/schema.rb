@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_04_054917) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_04_063451) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -44,6 +44,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_04_054917) do
     t.index ["cinema_id"], name: "index_halls_on_cinema_id"
   end
 
+  create_table "seats", force: :cascade do |t|
+    t.bigint "hall_id", null: false
+    t.string "seat_number", null: false
+    t.string "row", null: false
+    t.string "column", null: false
+    t.string "seat_type", default: "regular"
+    t.string "status", default: "available"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hall_id"], name: "index_seats_on_hall_id"
+  end
+
   add_foreign_key "cinemas", "cities"
   add_foreign_key "halls", "cinemas"
+  add_foreign_key "seats", "halls"
 end
