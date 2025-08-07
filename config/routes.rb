@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
+  # Rotas que estavam em HEAD (sua branch)
   get "movies/index"
+
+  # Rotas que estavam na main
+  get "cinemas/index"
+  get "cinemas/show"
+  get "cinemas/create"
+  get "cinemas/update"
+  get "cinemas/destroy"
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   #
 
@@ -13,6 +22,16 @@ Rails.application.routes.draw do
 
   # City
   resources :cities, except: [ :new, :edit ]
+
   # Movie
   resources :movies, except: [ :new, :edit ]
+
+  # Cinema
+  resources :cinemas, except: [ :new, :edit ]
+
+  # Hall
+  resources :halls, except: [ :new, :edit ]
+
+  # Seat
+  resources :seats, except: [ :new, :edit ]
 end

@@ -10,9 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_17_072836) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_04_063451) do
+  create_schema "auth"
+  create_schema "extensions"
+  create_schema "graphql"
+  create_schema "graphql_public"
+  create_schema "pgbouncer"
+  create_schema "realtime"
+  create_schema "storage"
+  create_schema "vault"
+
   # These are extensions that must be enabled in order to support this database
+  enable_extension "extensions.pg_stat_statements"
+  enable_extension "extensions.pgcrypto"
+  enable_extension "extensions.uuid-ossp"
+  enable_extension "graphql.pg_graphql"
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "vault.supabase_vault"
+
+  create_table "cinemas", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "address", null: false
+    t.string "cnpj", null: false
+    t.bigint "city_id", null: false
+    t.text "description"
+    t.string "phone", null: false
+    t.string "email", null: false
+    t.string "logo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_cinemas_on_city_id"
+  end
 
   create_table "cities", force: :cascade do |t|
     t.string "name", null: false
@@ -20,6 +48,31 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_17_072836) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "halls", force: :cascade do |t|
+    t.bigint "cinema_id", null: false
+    t.string "name", null: false
+    t.integer "total_seats", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cinema_id"], name: "index_halls_on_cinema_id"
+  end
+
+  create_table "seats", force: :cascade do |t|
+    t.bigint "hall_id", null: false
+    t.string "seat_number", null: false
+    t.string "row", null: false
+    t.string "column", null: false
+    t.string "seat_type", default: "regular"
+    t.string "status", default: "available"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hall_id"], name: "index_seats_on_hall_id"
+  end
+
+  add_foreign_key "cinemas", "cities"
+  add_foreign_key "halls", "cinemas"
+  add_foreign_key "seats", "halls"
 
   create_table "movies", force: :cascade do |t|
     t.string "title", limit: 255, null: false
