@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  movie: one
+  hall: one
+  start_time: 2025-08-04 12:29:10
+  end_time: 2025-08-04 12:29:10
+  language: MyString
+  subtitles: MyString
+  price_full: 9.99
+  price_half: 9.99
+  is_active: false
+
+two:
+  movie: two
+  hall: two
+  start_time: 2025-08-04 12:29:10
+  end_time: 2025-08-04 12:29:10
+  language: MyString
+  subtitles: MyString
+  price_full: 9.99
+  price_half: 9.99
+  is_active: false
