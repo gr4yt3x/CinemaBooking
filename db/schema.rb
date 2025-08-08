@@ -73,4 +73,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_04_063451) do
   add_foreign_key "cinemas", "cities"
   add_foreign_key "halls", "cinemas"
   add_foreign_key "seats", "halls"
+
+  create_table "movies", force: :cascade do |t|
+    t.string "title", limit: 255, null: false
+    t.text "description"
+    t.integer "duration_minutes"
+    t.string "genre", limit: 255
+    t.string "director", limit: 255
+    t.text "cast"
+    t.string "language", limit: 10
+    t.string "trailer", limit: 255
+    t.string "image", limit: 255
+    t.string "banner", limit: 255
+    t.date "release_date"
+    t.string "age_rating", limit: 20
+    t.boolean "is_active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 end
