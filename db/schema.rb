@@ -10,23 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_04_063451) do
-  create_schema "auth"
-  create_schema "extensions"
-  create_schema "graphql"
-  create_schema "graphql_public"
-  create_schema "pgbouncer"
-  create_schema "realtime"
-  create_schema "storage"
-  create_schema "vault"
-
+ActiveRecord::Schema[8.0].define(version: 2025_08_17_141201) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "extensions.pg_stat_statements"
-  enable_extension "extensions.pgcrypto"
-  enable_extension "extensions.uuid-ossp"
-  enable_extension "graphql.pg_graphql"
   enable_extension "pg_catalog.plpgsql"
-  enable_extension "vault.supabase_vault"
 
   create_table "cinemas", force: :cascade do |t|
     t.string "name", null: false
@@ -58,21 +44,21 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_04_063451) do
     t.index ["cinema_id"], name: "index_halls_on_cinema_id"
   end
 
-  create_table "seats", force: :cascade do |t|
-    t.bigint "hall_id", null: false
-    t.string "seat_number", null: false
-    t.string "row", null: false
-    t.string "column", null: false
-    t.string "seat_type", default: "regular"
-    t.string "status", default: "available"
+  create_table "movie_sessions", force: :cascade do |t|
+    t.bigint "movie_id", null: false
+    t.datetime "start_time", null: false
+    t.datetime "end_time", null: false
+    t.string "language", limit: 10, null: false
+    t.string "subtitles", limit: 10
+    t.decimal "price_full", precision: 10, scale: 2, null: false
+    t.decimal "price_half", precision: 10, scale: 2, null: false
+    t.boolean "is_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["hall_id"], name: "index_seats_on_hall_id"
+    t.bigint "hall_id", null: false
+    t.index ["hall_id"], name: "index_movie_sessions_on_hall_id"
+    t.index ["movie_id"], name: "index_movie_sessions_on_movie_id"
   end
-
-  add_foreign_key "cinemas", "cities"
-  add_foreign_key "halls", "cinemas"
-  add_foreign_key "seats", "halls"
 
   create_table "movies", force: :cascade do |t|
     t.string "title", limit: 255, null: false
@@ -91,4 +77,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_04_063451) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "seats", force: :cascade do |t|
+    t.bigint "hall_id", null: false
+    t.string "seat_number", null: false
+    t.string "row", null: false
+    t.string "column", null: false
+    t.string "seat_type", default: "regular"
+    t.string "status", default: "available"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hall_id"], name: "index_seats_on_hall_id"
+  end
+
+  add_foreign_key "cinemas", "cities"
+  add_foreign_key "halls", "cinemas"
+  add_foreign_key "movie_sessions", "halls"
+  add_foreign_key "movie_sessions", "movies"
+  add_foreign_key "seats", "halls"
 end
