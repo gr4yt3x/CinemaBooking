@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  # Rotas que estavam em HEAD (sua branch)
   get "movies/index"
-
-  # Rotas que estavam na main
   get "cinemas/index"
   get "cinemas/show"
   get "cinemas/create"
@@ -10,7 +7,6 @@ Rails.application.routes.draw do
   get "cinemas/destroy"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  #
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
@@ -34,4 +30,7 @@ Rails.application.routes.draw do
 
   # Seat
   resources :seats, except: [ :new, :edit ]
+
+  # Movie Session
+  resources :movie_sessions, except: [ :new, :edit ]
 end
