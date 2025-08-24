@@ -33,4 +33,7 @@ Rails.application.routes.draw do
 
   # Movie Session
   resources :movie_sessions, except: [ :new, :edit ]
+
+  # ping_endpoint
+  get "/ping", to: "ping#index"
 end
